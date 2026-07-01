@@ -12,3 +12,6 @@ if (!defined('ABSPATH')) {
     <li><?php echo $item; ?></li>
 <?php endforeach; ?>
 </ul>
+
+<hr>
+<p>Fitur Backend Kala</p>
