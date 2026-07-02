@@ -28,7 +28,37 @@ function gamifikasi_lms_assets() {
         false,
         true
     );
+wp_enqueue_script(
+    'firebase-app',
+    'https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js',
+    array(),
+    null,
+    true
+);
 
+wp_enqueue_script(
+    'firebase-auth',
+    'https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js',
+    array('firebase-app'),
+    null,
+    true
+);
+
+wp_enqueue_script(
+    'firebase-firestore',
+    'https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js',
+    array('firebase-app'),
+    null,
+    true
+);
+
+wp_enqueue_script(
+    'firebase-config',
+    plugin_dir_url(__FILE__) . 'firebase/firebase-config.js',
+    array('firebase-firestore'),
+    null,
+    true
+);
 }
 
 add_action('wp_enqueue_scripts', 'gamifikasi_lms_assets');
