@@ -150,3 +150,135 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+
+//login page//
+/* =========================================================
+   LEARNIO — Login Page Interactions
+   Catatan: Semua interaksi di sini HANYA tampilan (dummy).
+   Tidak ada pemanggilan API/Backend/Firebase di file ini.
+   Kala (backend) & Mayunda (Firebase) yang menyambungkan
+   submit handler ke proses autentikasi sesungguhnya.
+   ========================================================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------- Tab switching: Masuk / Daftar / Lupa Password ---------- */
+  const tabs = document.querySelectorAll('.lrn-auth-tab');
+  const forms = document.querySelectorAll('.lrn-auth-form');
+  const switchLinks = document.querySelectorAll('.lrn-auth-link[data-target]');
+  const feedbackEl = document.getElementById('auth-feedback');
+
+  function activateTarget(target) {
+    tabs.forEach((tab) => {
+      const isActive = tab.dataset.target === target;
+      tab.classList.toggle('lrn-auth-tab--active', isActive);
+      tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    forms.forEach((form) => {
+      form.classList.toggle('lrn-auth-form--active', form.dataset.form === target);
+    });
+    if (feedbackEl) feedbackEl.textContent = '';
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => activateTarget(tab.dataset.target));
+  });
+
+  switchLinks.forEach((link) => {
+    link.addEventListener('click', () => activateTarget(link.dataset.target));
+  });
+
+
+  /* ---------- Toggle tampilkan/sembunyikan password ---------- */
+  document.querySelectorAll('[data-toggle-password]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const input = btn.previousElementSibling;
+      if (!input) return;
+      const isHidden = input.type === 'password';
+      input.type = isHidden ? 'text' : 'password';
+      btn.textContent = isHidden ? '🙈' : '👁️';
+      btn.setAttribute('aria-label', isHidden ? 'Sembunyikan password' : 'Tampilkan password');
+    });
+  });
+
+
+  /* ---------- Avatar picker (form Daftar) ---------- */
+  const avatarOptions = document.querySelectorAll('.lrn-avatar-option');
+  avatarOptions.forEach((option) => {
+    option.addEventListener('click', () => {
+      avatarOptions.forEach((opt) => {
+        opt.classList.remove('lrn-avatar-option--active');
+        opt.setAttribute('aria-checked', 'false');
+      });
+      option.classList.add('lrn-avatar-option--active');
+      option.setAttribute('aria-checked', 'true');
+    });
+  });
+
+
+  /* ---------- Indikator kekuatan password (form Daftar) ---------- */
+  const registerPasswordInput = document.getElementById('register-password');
+  const strengthBar = document.getElementById('password-strength-bar');
+  const strengthLabel = document.getElementById('password-strength-label');
+
+  function evaluateStrength(value) {
+    let score = 0;
+    if (value.length >= 8) score += 1;
+    if (value.length >= 12) score += 1;
+    if (/[A-Z]/.test(value)) score += 1;
+    if (/[0-9]/.test(value)) score += 1;
+    if (/[^A-Za-z0-9]/.test(value)) score += 1;
+    return score;
+  }
+
+  if (registerPasswordInput && strengthBar && strengthLabel) {
+    registerPasswordInput.addEventListener('input', () => {
+      const value = registerPasswordInput.value;
+      const score = evaluateStrength(value);
+
+      let widthPct = 0;
+      let color = 'var(--lrn-red)';
+      let label = 'Minimal 8 karakter';
+
+      if (value.length === 0) {
+        widthPct = 0;
+        label = 'Minimal 8 karakter';
+      } else if (score <= 1) {
+        widthPct = 25;
+        color = 'var(--lrn-red)';
+        label = 'Lemah — tambahkan huruf besar & angka';
+      } else if (score <= 3) {
+        widthPct = 60;
+        color = 'var(--lrn-yellow)';
+        label = 'Cukup — tambahkan simbol untuk lebih kuat';
+      } else {
+        widthPct = 100;
+        color = 'var(--lrn-green)';
+        label = 'Kuat 💪';
+      }
+
+      strengthBar.style.width = `${widthPct}%`;
+      strengthBar.style.background = color;
+      strengthLabel.textContent = label;
+    });
+  }
+
+
+  /* ---------- Feedback dummy saat submit (belum terhubung backend) ---------- */
+  document.querySelectorAll('.lrn-auth-form').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!feedbackEl) return;
+
+      const type = form.dataset.form;
+      const messages = {
+        login: 'Form siap dikirim — hubungkan ke proses login backend/Firebase di sini.',
+        register: 'Form siap dikirim — hubungkan ke proses pendaftaran backend/Firebase di sini.',
+        forgot: 'Form siap dikirim — hubungkan ke proses reset password backend/Firebase di sini.'
+      };
+      feedbackEl.textContent = messages[type] || 'Form siap dikirim.';
+    });
+  });
+
+});
