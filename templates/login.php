@@ -1,213 +1,140 @@
-<!-- =========================================================
-     LEARNIO — Halaman Login / Daftar / Lupa Password
-     Fragment HTML saja (tanpa <head>, <link>, <script src>).
-     Pasang login.css & login.js secara manual di template kamu.
-     ========================================================= -->
+<main class="gml-login-page" aria-labelledby="gml-login-title">
+  <div class="gml-bg-blob gml-bg-blob-one"></div>
+  <div class="gml-bg-blob gml-bg-blob-two"></div>
+  <div class="gml-bg-blob gml-bg-blob-three"></div>
 
-<div class="lrn-auth">
+  <div class="gml-particles" aria-hidden="true">
+    <span class="gml-particle"></span>
+    <span class="gml-particle"></span>
+    <span class="gml-particle"></span>
+    <span class="gml-particle"></span>
+    <span class="gml-particle"></span>
+  </div>
 
-  <!-- ================= SISI KIRI: BRANDING & KOMUNITAS ================= -->
-  <section class="lrn-auth-side">
-    <div class="lrn-auth-side__bg"></div>
-
-    <div class="lrn-auth-side__content">
-      <div class="lrn-logo lrn-logo--light">
-        <span class="lrn-logo__dot lrn-logo__dot--1"></span>
-        <span class="lrn-logo__dot lrn-logo__dot--2"></span>
-        <span class="lrn-logo__dot lrn-logo__dot--3"></span>
-        <span class="lrn-logo__text">Learnio</span>
-      </div>
-
-      <blockquote class="lrn-auth-quote">
-        <p>“Setiap poin yang kamu kumpulkan hari ini adalah langkah menuju versi terbaik dirimu.”</p>
-        <cite>— Komunitas Learnio</cite>
-      </blockquote>
-
-      <div class="lrn-auth-highlight">
-        <div class="lrn-auth-highlight__icon">🔥</div>
-        <div>
-          <strong>2.400+ siswa</strong>
-          <span>menyelesaikan tantangan mingguan bersama</span>
-        </div>
-      </div>
-
-      <div class="lrn-auth-leaderboard">
-        <div class="lrn-auth-leaderboard__head">
-          <span>🏆 Leaderboard Komunitas</span>
-          <span class="lrn-auth-leaderboard__period">Minggu ini</span>
-        </div>
-
-        <ol class="lrn-auth-leaderboard__list">
-          <li>
-            <span class="lrn-auth-rank lrn-auth-rank--gold">1</span>
-            <span class="lrn-auth-avatar" aria-hidden="true">🦊</span>
-            <span class="lrn-auth-name">Daffa R.</span>
-            <span class="lrn-auth-points">15.200 pt</span>
-          </li>
-          <li>
-            <span class="lrn-auth-rank lrn-auth-rank--silver">2</span>
-            <span class="lrn-auth-avatar" aria-hidden="true">🐼</span>
-            <span class="lrn-auth-name">Aisyah P.</span>
-            <span class="lrn-auth-points">12.560 pt</span>
-          </li>
-          <li>
-            <span class="lrn-auth-rank lrn-auth-rank--bronze">3</span>
-            <span class="lrn-auth-avatar" aria-hidden="true">🐯</span>
-            <span class="lrn-auth-name">Raka S.</span>
-            <span class="lrn-auth-points">11.300 pt</span>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= SISI KANAN: FORM AUTENTIKASI ================= -->
-  <section class="lrn-auth-form-panel">
-    <div class="lrn-auth-card">
-
-      <div class="lrn-auth-card__mobile-logo">
-        <span class="lrn-logo__dot lrn-logo__dot--1"></span>
-        <span class="lrn-logo__dot lrn-logo__dot--2"></span>
-        <span class="lrn-logo__dot lrn-logo__dot--3"></span>
-        <span class="lrn-logo__text">Learnio</span>
-      </div>
-
-      <!-- Tabs -->
-      <div class="lrn-auth-tabs" role="tablist" aria-label="Autentikasi">
-        <button class="lrn-auth-tab lrn-auth-tab--active" data-target="login" role="tab" aria-selected="true">Masuk</button>
-        <button class="lrn-auth-tab" data-target="register" role="tab" aria-selected="false">Daftar</button>
-        <button class="lrn-auth-tab" data-target="forgot" role="tab" aria-selected="false">Lupa Password</button>
-      </div>
-
-      <!-- ============ FORM: LOGIN ============ -->
-      <form class="lrn-auth-form lrn-auth-form--active" id="form-login" data-form="login">
-        <h2 class="lrn-auth-title">Selamat Datang Kembali 👋</h2>
-        <p class="lrn-auth-desc">Masuk untuk melanjutkan progress belajarmu.</p>
-
-        <label class="lrn-field">
-          <span class="lrn-field__label">Email atau Username</span>
-          <input type="text" name="login-identity" placeholder="nama@email.com" autocomplete="username" required>
-        </label>
-
-        <label class="lrn-field">
-          <span class="lrn-field__label">Password</span>
-          <div class="lrn-field__password">
-            <input type="password" name="login-password" placeholder="Masukkan password" autocomplete="current-password" required>
-            <button type="button" class="lrn-field__toggle" data-toggle-password aria-label="Tampilkan password">👁️</button>
-          </div>
-        </label>
-
-        <div class="lrn-auth-row">
-          <label class="lrn-checkbox">
-            <input type="checkbox" name="remember-me">
-            <span>Ingat saya</span>
-          </label>
-          <button type="button" class="lrn-auth-link" data-target="forgot">Lupa password?</button>
-        </div>
-
-        <button type="submit" class="lrn-btn lrn-btn--primary lrn-btn--block">Masuk ke Learnio</button>
-
-        <div class="lrn-auth-divider"><span>atau lanjutkan dengan</span></div>
-
-        <div class="lrn-auth-social">
-          <button type="button" class="lrn-social-btn">
-            <span class="lrn-social-btn__icon">G</span> Google
-          </button>
-          <button type="button" class="lrn-social-btn">
-            <span class="lrn-social-btn__icon">f</span> Facebook
-          </button>
-        </div>
-
-        <p class="lrn-auth-switch">Belum punya akun? <button type="button" class="lrn-auth-link" data-target="register">Daftar sekarang</button></p>
-
-        <div class="lrn-security-badge">
-          <span>🔒</span> Koneksi kamu terenkripsi &amp; aman
-        </div>
-      </form>
-
-      <!-- ============ FORM: DAFTAR ============ -->
-      <form class="lrn-auth-form" id="form-register" data-form="register">
-        <h2 class="lrn-auth-title">Mulai Petualangan Belajarmu 🚀</h2>
-        <p class="lrn-auth-desc">Buat akun dan pilih karakter untuk profilmu.</p>
-
-        <div class="lrn-avatar-picker">
-          <span class="lrn-field__label">Pilih Avatar</span>
-          <div class="lrn-avatar-picker__list" role="radiogroup" aria-label="Pilih avatar">
-            <button type="button" class="lrn-avatar-option lrn-avatar-option--active" data-avatar="fox" role="radio" aria-checked="true">🦊</button>
-            <button type="button" class="lrn-avatar-option" data-avatar="panda" role="radio" aria-checked="false">🐼</button>
-            <button type="button" class="lrn-avatar-option" data-avatar="tiger" role="radio" aria-checked="false">🐯</button>
-            <button type="button" class="lrn-avatar-option" data-avatar="owl" role="radio" aria-checked="false">🦉</button>
-            <button type="button" class="lrn-avatar-option" data-avatar="cat" role="radio" aria-checked="false">🐱</button>
-          </div>
-        </div>
-
-        <label class="lrn-field">
-          <span class="lrn-field__label">Nama Lengkap</span>
-          <input type="text" name="register-name" placeholder="Nama kamu" autocomplete="name" required>
-        </label>
-
-        <label class="lrn-field">
-          <span class="lrn-field__label">Email</span>
-          <input type="email" name="register-email" placeholder="nama@email.com" autocomplete="email" required>
-        </label>
-
-        <label class="lrn-field">
-          <span class="lrn-field__label">Password</span>
-          <div class="lrn-field__password">
-            <input type="password" name="register-password" id="register-password" placeholder="Buat password" autocomplete="new-password" required>
-            <button type="button" class="lrn-field__toggle" data-toggle-password aria-label="Tampilkan password">👁️</button>
-          </div>
-          <div class="lrn-password-strength" aria-hidden="true">
-            <div class="lrn-password-strength__bar" id="password-strength-bar"></div>
-          </div>
-          <span class="lrn-password-strength__label" id="password-strength-label">Minimal 8 karakter</span>
-        </label>
-
-        <label class="lrn-checkbox">
-          <input type="checkbox" name="agree-terms" required>
-          <span>Saya setuju dengan Syarat &amp; Ketentuan Learnio</span>
-        </label>
-
-        <button type="submit" class="lrn-btn lrn-btn--primary lrn-btn--block">Buat Akun</button>
-
-        <div class="lrn-auth-divider"><span>atau daftar dengan</span></div>
-
-        <div class="lrn-auth-social">
-          <button type="button" class="lrn-social-btn">
-            <span class="lrn-social-btn__icon">G</span> Google
-          </button>
-          <button type="button" class="lrn-social-btn">
-            <span class="lrn-social-btn__icon">f</span> Facebook
-          </button>
-        </div>
-
-        <p class="lrn-auth-switch">Sudah punya akun? <button type="button" class="lrn-auth-link" data-target="login">Masuk di sini</button></p>
-      </form>
-
-      <!-- ============ FORM: LUPA PASSWORD ============ -->
-      <form class="lrn-auth-form" id="form-forgot" data-form="forgot">
-        <h2 class="lrn-auth-title">Lupa Password? 🔑</h2>
-        <p class="lrn-auth-desc">Masukkan email akunmu, kami akan kirimkan tautan reset password.</p>
-
-        <label class="lrn-field">
-          <span class="lrn-field__label">Email Terdaftar</span>
-          <input type="email" name="forgot-email" placeholder="nama@email.com" autocomplete="email" required>
-        </label>
-
-        <button type="submit" class="lrn-btn lrn-btn--primary lrn-btn--block">Kirim Tautan Reset</button>
-
-        <p class="lrn-auth-switch">
-          <button type="button" class="lrn-auth-link" data-target="login">← Kembali ke halaman masuk</button>
+  <div class="gml-login-layout">
+    <section class="gml-hero-panel" aria-label="Gamifikasi LMS welcome">
+      <div class="gml-hero-copy">
+        <span class="gml-kicker">Gamifikasi LMS</span>
+        <h1 class="gml-hero-title">Continue your learning adventure.</h1>
+        <p class="gml-hero-text">
+          Earn XP, unlock achievements, climb the leaderboard, and keep every lesson feeling rewarding.
         </p>
+      </div>
 
-        <div class="lrn-security-badge">
-          <span>🔒</span> Tautan reset berlaku 15 menit demi keamananmu
+      <div class="gml-illustration" data-gml-parallax>
+        <div class="gml-orbit gml-orbit-one"></div>
+        <div class="gml-orbit gml-orbit-two"></div>
+
+        <article class="gml-achievement-card">
+          <div class="gml-achievement-icon">★</div>
+          <div>
+            <strong>Achievement Unlocked</strong>
+            <span>7-day learning streak</span>
+          </div>
+        </article>
+
+        <article class="gml-xp-card">
+          <span>+850 XP</span>
+          <strong>Level 12</strong>
+        </article>
+
+        <article class="gml-leaderboard-widget">
+          <div class="gml-leaderboard-header">
+            <strong>Leaderboard</strong>
+            <span>Today</span>
+          </div>
+          <ol class="gml-leaderboard-list">
+            <li><span>1</span><strong>Nadia</strong><em>9,420 XP</em></li>
+            <li><span>2</span><strong>Raka</strong><em>8,880 XP</em></li>
+            <li><span>3</span><strong>You</strong><em>8,610 XP</em></li>
+          </ol>
+        </article>
+
+        <span class="gml-floating-badge gml-floating-badge-one">🏆</span>
+        <span class="gml-floating-badge gml-floating-badge-two">⚡</span>
+        <span class="gml-floating-badge gml-floating-badge-three">🪙</span>
+        <span class="gml-floating-badge gml-floating-badge-four">✓</span>
+      </div>
+    </section>
+
+    <section class="gml-form-panel" aria-label="Login form">
+      <article class="gml-login-card">
+        <div class="gml-logo" aria-label="Gamifikasi LMS">
+          <span class="gml-logo-mark">G</span>
+          <span class="gml-logo-text">Gamifikasi LMS</span>
         </div>
-      </form>
 
-      <!-- Notifikasi status (dummy, dikendalikan JS) -->
-      <p class="lrn-auth-feedback" id="auth-feedback" aria-live="polite"></p>
-    </div>
-  </section>
+        <div class="gml-card-heading">
+          <h2 id="gml-login-title">Welcome back</h2>
+          <p>Login to manage courses, track progress, and keep momentum going.</p>
+        </div>
 
-</div>
+        <form class="gml-login-form" action="#" method="post" novalidate>
+          <div class="gml-input-group" data-gml-field>
+            <span class="gml-input-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11Zm2.25-.75 5.23 4.25c.3.24.74.24 1.04 0l5.23-4.25H6.25Zm12 2.22-4.62 3.75a2.6 2.6 0 0 1-3.26 0L5.75 7.97v9.53c0 .41.34.75.75.75h11c.41 0 .75-.34.75-.75V7.97Z"/>
+              </svg>
+            </span>
+            <input class="gml-input" id="gml-email" name="email" type="email" autocomplete="email" required placeholder=" ">
+            <label class="gml-input-label" for="gml-email">Email address</label>
+            <span class="gml-field-message" aria-live="polite"></span>
+          </div>
+
+          <div class="gml-input-group" data-gml-field>
+            <span class="gml-input-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M7 10V8a5 5 0 0 1 10 0v2h.5A2.5 2.5 0 0 1 20 12.5v5A2.5 2.5 0 0 1 17.5 20h-11A2.5 2.5 0 0 1 4 17.5v-5A2.5 2.5 0 0 1 6.5 10H7Zm2 0h6V8a3 3 0 0 0-6 0v2Zm3 3.25a1.25 1.25 0 0 0-.5 2.4V17a.5.5 0 0 0 1 0v-1.35a1.25 1.25 0 0 0-.5-2.4Z"/>
+              </svg>
+            </span>
+            <input class="gml-input" id="gml-password" name="password" type="password" autocomplete="current-password" required placeholder=" ">
+            <label class="gml-input-label" for="gml-password">Password</label>
+            <button class="gml-password-toggle" type="button" aria-label="Show password" aria-pressed="false">
+              <svg class="gml-eye-icon" viewBox="0 0 24 24" focusable="false">
+                <path d="M12 5c5 0 8.5 4.4 9.6 5.95a1.8 1.8 0 0 1 0 2.1C20.5 14.6 17 19 12 19s-8.5-4.4-9.6-5.95a1.8 1.8 0 0 1 0-2.1C3.5 9.4 7 5 12 5Zm0 2c-3.7 0-6.5 3.1-7.85 5C5.5 13.9 8.3 17 12 17s6.5-3.1 7.85-5C18.5 10.1 15.7 7 12 7Zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/>
+              </svg>
+            </button>
+            <span class="gml-field-message" aria-live="polite"></span>
+          </div>
+
+          <div class="gml-form-options">
+            <label class="gml-remember">
+              <input class="gml-checkbox" type="checkbox" name="remember">
+              <span class="gml-checkbox-box"></span>
+              <span>Remember me</span>
+            </label>
+            <a class="gml-forgot-link" href="#">Forgot password?</a>
+          </div>
+
+          <button class="gml-login-btn" type="submit">
+            <span class="gml-btn-text">Login</span>
+            <span class="gml-btn-loader" aria-hidden="true"></span>
+          </button>
+
+          <div class="gml-divider" role="separator">
+            <span>or continue with</span>
+          </div>
+
+          <div class="gml-social-actions">
+            <button class="gml-social-btn" type="button">
+              <span class="gml-social-icon">G</span>
+              <span>Google</span>
+            </button>
+            <button class="gml-social-btn" type="button">
+              <span class="gml-social-icon">M</span>
+              <span>Microsoft</span>
+            </button>
+          </div>
+
+          <p class="gml-register-text">
+            New to Gamifikasi LMS? <a class="gml-register-link" href="#">Create an account</a>
+          </p>
+        </form>
+
+        <footer class="gml-card-footer">
+          <p>Secure learning access for students, teachers, creators, and teams.</p>
+        </footer>
+      </article>
+    </section>
+  </div>
+</main>

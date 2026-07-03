@@ -1,284 +1,298 @@
-console.log("Gamifikasi LMS Loaded");
-/* =========================================================
-   LEARNIO — Landing Page Interactions
-   Catatan: Semua state di sini HANYA simulasi tampilan (dummy).
-   Tidak ada pemanggilan API/Backend/Firebase di file ini.
-   ========================================================= */
+(function () {
+  "use strict";
 
-document.addEventListener("DOMContentLoaded", () => {
-  /* ---------- Hero: animasi angka poin & progress saat pertama muncul ---------- */
-  const pointCounterEl = document.getElementById("lrn-point-counter");
-  const heroFillEl = document.getElementById("lrn-progress-fill");
-  const heroPctEl = document.getElementById("lrn-progress-pct");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealItems = document.querySelectorAll(".gml-reveal");
+  const counters = document.querySelectorAll(".gml-counter");
+  const navToggle = document.querySelector(".gml-nav-toggle");
+  const navMenu = document.querySelector(".gml-nav-menu");
+  const parallaxTarget = document.querySelector(".gml-parallax");
 
-  const animateCountUp = (el, target, duration = 900) => {
-    if (!el) return;
-    const start = 0;
-    const startTime = performance.now();
-    const format = (n) => Math.round(n).toLocaleString("id-ID");
+  function animateCounter(element) {
+    const target = Number(element.dataset.gmlTarget || 0);
+    const duration = 1200;
+    const start = performance.now();
 
-    const step = (now) => {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-      el.textContent = format(start + (target - start) * eased);
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  };
+    function update(time) {
+      const progress = Math.min((time - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
 
-  const heroObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCountUp(pointCounterEl, 12560);
-          if (heroFillEl) heroFillEl.style.width = "72%";
-          if (heroPctEl) heroPctEl.textContent = "72%";
-          heroObserver.disconnect();
+      element.textContent = Math.round(target * eased).toString();
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  const observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) {
+          return;
         }
+
+        entry.target.classList.add("gml-visible");
+
+        if (entry.target.classList.contains("gml-counter") && !entry.target.dataset.gmlAnimated) {
+          entry.target.dataset.gmlAnimated = "true";
+          animateCounter(entry.target);
+        }
+
+        observer.unobserve(entry.target);
       });
     },
-    { threshold: 0.4 },
+    {
+      threshold: 0.18,
+      rootMargin: "0px 0px -40px 0px"
+    }
   );
 
-  const heroPanel = document.querySelector(".lrn-panel");
-  if (heroPanel) heroObserver.observe(heroPanel);
-
-  /* ---------- Demo widget: simulasi poin, XP, level, dan badge ---------- */
-  const demoBtn = document.getElementById("demo-btn");
-  const demoPointsEl = document.getElementById("demo-points");
-  const demoXpEl = document.getElementById("demo-xp");
-  const demoXpMaxEl = document.getElementById("demo-xp-max");
-  const demoLevelEl = document.getElementById("demo-level");
-  const demoFillEl = document.getElementById("demo-progress-fill");
-  const demoFeedbackEl = document.getElementById("demo-feedback");
-  const demoBadges = document.querySelectorAll(".lrn-demo-badge");
-
-  const demoState = {
-    points: 320,
-    xp: 40,
-    xpMax: 100,
-    level: 3,
-    clicks: 0,
-  };
-
-  const feedbackMessages = [
-    "Mantap! Poin bertambah 🎉",
-    "Terus lanjutkan, kamu on fire 🔥",
-    "Konsisten itu kunci! 💪",
-    "Selangkah lagi menuju badge baru ✨",
-  ];
-
-  function unlockBadge(key) {
-    const badgeEl = document.querySelector(
-      `.lrn-demo-badge[data-badge="${key}"]`,
-    );
-    if (badgeEl && badgeEl.classList.contains("lrn-demo-badge--locked")) {
-      badgeEl.classList.remove("lrn-demo-badge--locked");
-      badgeEl.classList.add("lrn-demo-badge--unlocked");
-      return true;
-    }
-    return false;
-  }
-
-  function updateDemoUI() {
-    if (demoPointsEl)
-      demoPointsEl.textContent = demoState.points.toLocaleString("id-ID");
-    if (demoXpEl) demoXpEl.textContent = demoState.xp;
-    if (demoXpMaxEl) demoXpMaxEl.textContent = demoState.xpMax;
-    if (demoLevelEl) demoLevelEl.textContent = demoState.level;
-    if (demoFillEl)
-      demoFillEl.style.width = `${(demoState.xp / demoState.xpMax) * 100}%`;
-  }
-
-  if (demoBtn) {
-    demoBtn.addEventListener("click", () => {
-      demoState.clicks += 1;
-      demoState.points += 20;
-      demoState.xp += 20;
-
-      let message =
-        feedbackMessages[(demoState.clicks - 1) % feedbackMessages.length];
-
-      // Naik level jika XP penuh
-      if (demoState.xp >= demoState.xpMax) {
-        demoState.xp = demoState.xp - demoState.xpMax;
-        demoState.level += 1;
-        message = `Level Up! Sekarang Level ${demoState.level} 🚀`;
-      }
-
-      // Unlock badge berdasarkan progres (simulasi milestone)
-      if (demoState.clicks === 1) {
-        // badge "Pemula" sudah terbuka dari awal
-      } else if (demoState.clicks === 3) {
-        if (unlockBadge("streak")) message = 'Badge "Konsisten" terbuka! 🥈';
-      } else if (demoState.clicks === 5) {
-        if (unlockBadge("master")) message = 'Badge "Master" terbuka! 🥇';
-      }
-
-      updateDemoUI();
-
-      if (demoFeedbackEl) {
-        demoFeedbackEl.textContent = message;
-      }
-
-      // Micro-interaction: tombol "denyut" sebentar
-      demoBtn.style.transform = "scale(0.97)";
-      setTimeout(() => {
-        demoBtn.style.transform = "";
-      }, 120);
-
-      if (demoState.clicks >= 5) {
-        demoBtn.disabled = true;
-        demoBtn.textContent = "Semua Tantangan Demo Selesai 🎉";
-        demoBtn.style.opacity = "0.7";
-        demoBtn.style.cursor = "default";
-      }
-    });
-  }
-
-  /* ---------- Smooth scroll offset untuk navbar sticky (opsional, sudah dibantu CSS scroll-behavior) ---------- */
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (e) => {
-      const targetId = link.getAttribute("href");
-      if (targetId.length > 1) {
-        const targetEl = document.querySelector(targetId);
-        if (targetEl) {
-          e.preventDefault();
-          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }
-    });
-  });
-});
-
-
-//login page//
-/* =========================================================
-   LEARNIO — Login Page Interactions
-   Catatan: Semua interaksi di sini HANYA tampilan (dummy).
-   Tidak ada pemanggilan API/Backend/Firebase di file ini.
-   Kala (backend) & Mayunda (Firebase) yang menyambungkan
-   submit handler ke proses autentikasi sesungguhnya.
-   ========================================================= */
-
-document.addEventListener('DOMContentLoaded', () => {
-
-  /* ---------- Tab switching: Masuk / Daftar / Lupa Password ---------- */
-  const tabs = document.querySelectorAll('.lrn-auth-tab');
-  const forms = document.querySelectorAll('.lrn-auth-form');
-  const switchLinks = document.querySelectorAll('.lrn-auth-link[data-target]');
-  const feedbackEl = document.getElementById('auth-feedback');
-
-  function activateTarget(target) {
-    tabs.forEach((tab) => {
-      const isActive = tab.dataset.target === target;
-      tab.classList.toggle('lrn-auth-tab--active', isActive);
-      tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
-    forms.forEach((form) => {
-      form.classList.toggle('lrn-auth-form--active', form.dataset.form === target);
-    });
-    if (feedbackEl) feedbackEl.textContent = '';
-  }
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => activateTarget(tab.dataset.target));
+  revealItems.forEach(function (item) {
+    observer.observe(item);
   });
 
-  switchLinks.forEach((link) => {
-    link.addEventListener('click', () => activateTarget(link.dataset.target));
+  counters.forEach(function (counter) {
+    observer.observe(counter);
   });
 
-
-  /* ---------- Toggle tampilkan/sembunyikan password ---------- */
-  document.querySelectorAll('[data-toggle-password]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const input = btn.previousElementSibling;
-      if (!input) return;
-      const isHidden = input.type === 'password';
-      input.type = isHidden ? 'text' : 'password';
-      btn.textContent = isHidden ? '🙈' : '👁️';
-      btn.setAttribute('aria-label', isHidden ? 'Sembunyikan password' : 'Tampilkan password');
+  if (navToggle && navMenu) {
+    navToggle.addEventListener("click", function () {
+      const isOpen = navMenu.classList.toggle("gml-nav-open");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
-  });
 
-
-  /* ---------- Avatar picker (form Daftar) ---------- */
-  const avatarOptions = document.querySelectorAll('.lrn-avatar-option');
-  avatarOptions.forEach((option) => {
-    option.addEventListener('click', () => {
-      avatarOptions.forEach((opt) => {
-        opt.classList.remove('lrn-avatar-option--active');
-        opt.setAttribute('aria-checked', 'false');
+    navMenu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navMenu.classList.remove("gml-nav-open");
+        navToggle.setAttribute("aria-expanded", "false");
       });
-      option.classList.add('lrn-avatar-option--active');
-      option.setAttribute('aria-checked', 'true');
+    });
+  }
+
+  document.querySelectorAll(".gml-faq-item button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const item = button.closest(".gml-faq-item");
+      const isOpen = item.classList.toggle("gml-faq-open");
+      const indicator = button.querySelector("span");
+
+      if (indicator) {
+        indicator.textContent = isOpen ? "−" : "+";
+      }
     });
   });
 
+  document.querySelectorAll(".gml-btn").forEach(function (button) {
+    button.addEventListener("click", function (event) {
+      const ripple = document.createElement("span");
+      const rect = button.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
 
-  /* ---------- Indikator kekuatan password (form Daftar) ---------- */
-  const registerPasswordInput = document.getElementById('register-password');
-  const strengthBar = document.getElementById('password-strength-bar');
-  const strengthLabel = document.getElementById('password-strength-label');
+      ripple.className = "gml-ripple";
+      ripple.style.width = size + "px";
+      ripple.style.height = size + "px";
+      ripple.style.left = event.clientX - rect.left - size / 2 + "px";
+      ripple.style.top = event.clientY - rect.top - size / 2 + "px";
 
-  function evaluateStrength(value) {
-    let score = 0;
-    if (value.length >= 8) score += 1;
-    if (value.length >= 12) score += 1;
-    if (/[A-Z]/.test(value)) score += 1;
-    if (/[0-9]/.test(value)) score += 1;
-    if (/[^A-Za-z0-9]/.test(value)) score += 1;
-    return score;
-  }
+      button.appendChild(ripple);
 
-  if (registerPasswordInput && strengthBar && strengthLabel) {
-    registerPasswordInput.addEventListener('input', () => {
-      const value = registerPasswordInput.value;
-      const score = evaluateStrength(value);
+      window.setTimeout(function () {
+        ripple.remove();
+      }, 600);
+    });
+  });
 
-      let widthPct = 0;
-      let color = 'var(--lrn-red)';
-      let label = 'Minimal 8 karakter';
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener("click", function (event) {
+      const targetId = anchor.getAttribute("href");
 
-      if (value.length === 0) {
-        widthPct = 0;
-        label = 'Minimal 8 karakter';
-      } else if (score <= 1) {
-        widthPct = 25;
-        color = 'var(--lrn-red)';
-        label = 'Lemah — tambahkan huruf besar & angka';
-      } else if (score <= 3) {
-        widthPct = 60;
-        color = 'var(--lrn-yellow)';
-        label = 'Cukup — tambahkan simbol untuk lebih kuat';
-      } else {
-        widthPct = 100;
-        color = 'var(--lrn-green)';
-        label = 'Kuat 💪';
+      if (!targetId || targetId === "#") {
+        return;
       }
 
-      strengthBar.style.width = `${widthPct}%`;
-      strengthBar.style.background = color;
-      strengthLabel.textContent = label;
-    });
-  }
+      const target = document.querySelector(targetId);
 
+      if (!target) {
+        return;
+      }
 
-  /* ---------- Feedback dummy saat submit (belum terhubung backend) ---------- */
-  document.querySelectorAll('.lrn-auth-form').forEach((form) => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!feedbackEl) return;
-
-      const type = form.dataset.form;
-      const messages = {
-        login: 'Form siap dikirim — hubungkan ke proses login backend/Firebase di sini.',
-        register: 'Form siap dikirim — hubungkan ke proses pendaftaran backend/Firebase di sini.',
-        forgot: 'Form siap dikirim — hubungkan ke proses reset password backend/Firebase di sini.'
-      };
-      feedbackEl.textContent = messages[type] || 'Form siap dikirim.';
+      event.preventDefault();
+      target.scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+        block: "start"
+      });
     });
   });
 
-});
+  if (parallaxTarget && !prefersReducedMotion) {
+    window.addEventListener(
+      "pointermove",
+      function (event) {
+        const x = (event.clientX / window.innerWidth - 0.5) * 18;
+        const y = (event.clientY / window.innerHeight - 0.5) * 18;
+
+        parallaxTarget.style.transform = "translate3d(" + x + "px, " + y + "px, 0)";
+      },
+      { passive: true }
+    );
+  }
+})();
+
+
+//*js login*//
+(function () {
+  "use strict";
+
+  var gmlPage = document.querySelector(".gml-login-page");
+  var gmlForm = document.querySelector(".gml-login-form");
+  var gmlPasswordInput = document.querySelector("#gml-password");
+  var gmlPasswordToggle = document.querySelector(".gml-password-toggle");
+  var gmlParallaxTarget = document.querySelector("[data-gml-parallax]");
+
+  function gmlSetFieldState(gmlInput, gmlState, gmlMessage) {
+    var gmlField = gmlInput.closest("[data-gml-field]");
+    var gmlMessageElement = gmlField ? gmlField.querySelector(".gml-field-message") : null;
+
+    if (!gmlField) {
+      return;
+    }
+
+    gmlField.classList.remove("gml-field-error", "gml-field-success");
+
+    if (gmlState) {
+      gmlField.classList.add("gml-field-" + gmlState);
+    }
+
+    if (gmlMessageElement) {
+      gmlMessageElement.textContent = gmlMessage || "";
+    }
+  }
+
+  function gmlValidateEmail(gmlValue) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(gmlValue);
+  }
+
+  function gmlValidateField(gmlInput) {
+    var gmlValue = gmlInput.value.trim();
+
+    if (!gmlValue) {
+      gmlSetFieldState(gmlInput, "error", "This field is required.");
+      return false;
+    }
+
+    if (gmlInput.type === "email" && !gmlValidateEmail(gmlValue)) {
+      gmlSetFieldState(gmlInput, "error", "Enter a valid email address.");
+      return false;
+    }
+
+    if (gmlInput.name === "password" && gmlValue.length < 6) {
+      gmlSetFieldState(gmlInput, "error", "Password must be at least 6 characters.");
+      return false;
+    }
+
+    gmlSetFieldState(gmlInput, "success", "Looks good.");
+    return true;
+  }
+
+  function gmlCreateRipple(gmlButton, gmlEvent) {
+    var gmlRipple = document.createElement("span");
+    var gmlRect = gmlButton.getBoundingClientRect();
+    var gmlSize = Math.max(gmlRect.width, gmlRect.height);
+    var gmlX = gmlEvent.clientX - gmlRect.left - gmlSize / 2;
+    var gmlY = gmlEvent.clientY - gmlRect.top - gmlSize / 2;
+
+    gmlRipple.className = "gml-ripple";
+    gmlRipple.style.width = gmlSize + "px";
+    gmlRipple.style.height = gmlSize + "px";
+    gmlRipple.style.left = gmlX + "px";
+    gmlRipple.style.top = gmlY + "px";
+
+    gmlButton.appendChild(gmlRipple);
+
+    window.setTimeout(function () {
+      gmlRipple.remove();
+    }, 650);
+  }
+
+  if (gmlPasswordToggle && gmlPasswordInput) {
+    gmlPasswordToggle.addEventListener("click", function () {
+      var gmlIsHidden = gmlPasswordInput.type === "password";
+
+      gmlPasswordInput.type = gmlIsHidden ? "text" : "password";
+      gmlPasswordToggle.setAttribute("aria-pressed", String(gmlIsHidden));
+      gmlPasswordToggle.setAttribute("aria-label", gmlIsHidden ? "Hide password" : "Show password");
+      gmlPasswordInput.focus();
+    });
+  }
+
+  document.querySelectorAll(".gml-input").forEach(function (gmlInput) {
+    gmlInput.addEventListener("blur", function () {
+      gmlValidateField(gmlInput);
+    });
+
+    gmlInput.addEventListener("input", function () {
+      if (gmlInput.closest(".gml-field-error")) {
+        gmlValidateField(gmlInput);
+      }
+    });
+  });
+
+  document.querySelectorAll(".gml-login-btn, .gml-social-btn").forEach(function (gmlButton) {
+    gmlButton.addEventListener("click", function (gmlEvent) {
+      gmlCreateRipple(gmlButton, gmlEvent);
+    });
+  });
+
+  if (gmlForm) {
+    gmlForm.addEventListener("submit", function (gmlEvent) {
+      var gmlInputs = Array.prototype.slice.call(gmlForm.querySelectorAll(".gml-input"));
+      var gmlIsValid = gmlInputs.every(gmlValidateField);
+      var gmlLoginButton = gmlForm.querySelector(".gml-login-btn");
+
+      gmlEvent.preventDefault();
+
+      if (!gmlIsValid || !gmlLoginButton) {
+        return;
+      }
+
+      gmlLoginButton.classList.add("gml-btn-loading");
+      gmlLoginButton.disabled = true;
+
+      window.setTimeout(function () {
+        gmlLoginButton.classList.remove("gml-btn-loading");
+        gmlLoginButton.disabled = false;
+      }, 1300);
+    });
+  }
+
+  if (gmlPage && gmlParallaxTarget && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gmlPage.addEventListener("pointermove", function (gmlEvent) {
+      var gmlRect = gmlPage.getBoundingClientRect();
+      var gmlX = (gmlEvent.clientX - gmlRect.width / 2) / gmlRect.width;
+      var gmlY = (gmlEvent.clientY - gmlRect.height / 2) / gmlRect.height;
+
+      gmlParallaxTarget.style.transform = "translate3d(" + gmlX * 14 + "px, " + gmlY * 14 + "px, 0)";
+    });
+
+    gmlPage.addEventListener("pointerleave", function () {
+      gmlParallaxTarget.style.transform = "translate3d(0, 0, 0)";
+    });
+  }
+
+  if ("IntersectionObserver" in window) {
+    var gmlObserver = new IntersectionObserver(function (gmlEntries) {
+      gmlEntries.forEach(function (gmlEntry) {
+        if (gmlEntry.isIntersecting) {
+          gmlEntry.target.classList.add("gml-is-visible");
+          gmlObserver.unobserve(gmlEntry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll(".gml-login-card, .gml-illustration").forEach(function (gmlElement) {
+      gmlObserver.observe(gmlElement);
+    });
+  }
+})();
