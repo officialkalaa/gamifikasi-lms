@@ -32,3 +32,14 @@ function gamifikasi_landing_shortcode() {
 }
 
 add_shortcode('gamifikasi_landing', 'gamifikasi_landing_shortcode');
+
+function gamifikasi_login_shortcode() {
+
+    ob_start();
+
+    include plugin_dir_path(__DIR__) . 'templates/login.php';
+
+    return ob_get_clean();
+}
+
+add_shortcode('gamifikasi_login', 'gamifikasi_login_shortcode');
