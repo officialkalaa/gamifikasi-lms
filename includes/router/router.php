@@ -13,10 +13,16 @@ function gamifikasi_add_routes() {
     );
 
     add_rewrite_rule(
-    '^landing/?$',
-    'index.php?gamifikasi_page=landing-page',
-    'top'
-);
+        '^landing/?$',
+        'index.php?gamifikasi_page=landing-page',
+        'top'
+    );
+
+    add_rewrite_rule(
+        '^register/?$',
+        'index.php?gamifikasi_page=register',
+        'top'
+    );
 
 }
 
