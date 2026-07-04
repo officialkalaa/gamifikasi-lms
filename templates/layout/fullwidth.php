@@ -2,7 +2,6 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -14,8 +13,7 @@ if (!defined('ABSPATH')) {
 <body <?php body_class(); ?>>
 
 <?php
-// Konten halaman akan ditampilkan di sini
-echo do_shortcode('[gamifikasi_landing]');
+echo $content;
 ?>
 
 <?php wp_footer(); ?>

@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+
+  padding: 0;
+}
+
+.wp-site-blocks {
+  padding: 0 !important;
+
+  margin: 0 !important;
+
+  max-width: 100% !important;
+}
+
+.wp-block-post-content {
+  margin: 0 !important;
+
+  max-width: 100% !important;
+}
+
+.entry-content {
+  margin: 0 !important;
+
+  max-width: 100% !important;
+}
+
+main {
+  margin: 0;
+
+  padding: 0;
+
+  max-width: 100%;
+}
+
+.wp-block-group.is-layout-constrained {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.wp-block-post-content {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.entry-content {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}

@@ -14,7 +14,7 @@
       <a href="#gml-showcase">Showcase</a>
       <a href="#gml-pricing">Pricing</a>
       <a href="#gml-faq">FAQ</a>
-      <a class="gml-nav-cta" href="#gml-final-cta">Get Started</a>
+      <a class="gml-nav-cta" href="/login">Get Started</a>
     </div>
   </nav>
 
@@ -29,7 +29,7 @@
         <p>Boost student engagement with XP, badges, levels, missions, rewards, achievements, progress tracking, and leaderboards built for modern WordPress LMS platforms.</p>
 
         <div class="gml-hero-actions">
-          <a class="gml-btn gml-btn-primary" href="#gml-pricing">Start Gamifying</a>
+          <a class="gml-btn gml-btn-primary" href="/login">Start Gamifying</a>
           <a class="gml-btn gml-btn-soft" href="#gml-showcase">View Dashboard</a>
         </div>
 

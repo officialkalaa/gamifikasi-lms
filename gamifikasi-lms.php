@@ -17,6 +17,11 @@ require_once plugin_dir_path(__FILE__) . 'includes/loader.php';
 function gamifikasi_lms_assets() {
 
     wp_enqueue_style(
+        'gamifikasi-reset',
+        plugin_dir_url(__FILE__) . 'assets/css/reset.css'
+    );
+
+    wp_enqueue_style(
         'gamifikasi-style',
         plugin_dir_url(__FILE__) . 'assets/css/style.css'
     );
