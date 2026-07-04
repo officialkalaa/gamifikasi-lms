@@ -127,7 +127,7 @@
           </div>
 
           <p class="gml-register-text">
-            New to Gamifikasi LMS? <a class="gml-register-link" href="#">Create an account</a>
+            New to Gamifikasi LMS? <a class="gml-register-link" href="/register">Create an account</a>
           </p>
         </form>
 
