@@ -1,98 +1,46 @@
-# Gamifikasi LMS - Project Rules
+PROJECT RULES - GAMIFIKASI LMS
 
-## Project Overview
+This is a WordPress Plugin project with custom frontend architecture.
 
-Project Name:
-Gamifikasi LMS
+CORE ARCHITECTURE:
 
-Platform:
-WordPress Plugin
+- WordPress is only used as backend CMS
+- All frontend pages use custom router system
+- No WordPress Pages for application routes
+- No shortcode for application pages
 
-Team
+ROUTING SYSTEM:
 
-Backend:
-Kala
+- All pages are handled via includes/router/router.php
+- Example routes:
+  /login
+  /landing
+  /dashboard
+  /leaderboard
+  /quiz
+  /profile
 
-Frontend:
-Yuke
+FILE STRUCTURE RULES:
 
-Firebase:
-Mayunda
+- All pages must be inside templates/
+- Layout system must use templates/layout/fullwidth.php
+- CSS must be inside assets/css/style.css
+- JS must be inside assets/js/script.js
 
----
+DEVELOPMENT RULES:
 
-## Folder Structure
+- Never modify WordPress theme files
+- Never use Elementor or page builders
+- Never create duplicate CSS files
+- Never create duplicate JS files
+- Never override router unless required
 
-admin/
-Backend
+WORKFLOW RULE:
 
-includes/
-Backend
+- Every feature must go through Git (branch → commit → PR → merge)
+- No direct push to main
 
-templates/
-Frontend HTML + Backend PHP
+UI RULE:
 
-assets/css/
-Frontend CSS
-
-assets/js/
-Frontend JavaScript
-
-firebase/
-Firebase
-
-gamifikasi-lms.php
-Main Plugin
-
----
-
-## Git Workflow
-
-Backend
-
-git checkout backend-kala
-
-Frontend
-
-git checkout frontend-yuke
-
-Firebase
-
-git checkout firebase-mayunda
-
-Workflow
-
-1. git pull
-2. Coding
-3. Testing
-4. git add .
-5. git commit -m "..."
-6. git push
-7. Create Pull Request
-8. Merge ke main (Hanya dilakukan oleh Kala)
-
----
-
-## Coding Rules
-
-- Jangan mengubah folder milik role lain.
-- Jangan menghapus file tanpa persetujuan.
-- Selalu test di localWP sebelum push.
-- Semua perubahan harus melalui Pull Request.
-- Branch main hanya berisi kode yang sudah stabil.
-
----
-
-## AI Rules
-
-Gunakan file berikut sesuai role:
-
-FRONTEND_RULES.md
-
-BACKEND_RULES.md
-
-FIREBASE_RULES.md
-
-Selalu copy prompt dari file tersebut.
-
-semoga selalu lancar dan sedikit bug nya:)
+- Must use prefix "gml-" for all frontend classes
+- Must follow existing design system

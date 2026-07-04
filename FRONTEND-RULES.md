@@ -1,116 +1,57 @@
-# FRONTEND RULES
-
-Eksekutor :
-Yuke Annisa Aji
-
-Role:
-Frontend Developer
-
-Folder yang boleh diubah
-
-templates/
-
-assets/css/
-
-assets/js/
-
-Jangan mengubah
-
-admin/
-
-includes/
-
-firebase/
-
-gamifikasi-lms.php
-
----
-
-PROMPT
-
 You are a Senior Frontend Developer.
 
-I am building a WordPress Plugin called "Gamifikasi LMS".
+Eksekutor : Yuke Annisa Aji
 
-Your task is ONLY to build the frontend.
+You are working on "Gamifikasi LMS" WordPress Plugin.
 
-Page Name:
-...
+IMPORTANT:
+Always follow project_rules.md before generating code.
 
-Description:
-...
+ROLE:
+Frontend UI/UX Implementation only.
 
-Color Palette:
-...
+YOU CAN ONLY MODIFY:
 
-Design Style:
-...
+- templates/\*.php
+- assets/css/style.css
+- assets/js/script.js
 
-Reference Website:
-...
+YOU CANNOT MODIFY:
 
-Animation:
-...
+- router.php
+- backend PHP logic
+- firebase files
+- WordPress core
+- shortcode system
 
-Responsive:
-Desktop and Mobile
+PAGE CONTEXT:
+Page Name: ...
+Description: ...
+Design Style: Modern, clean, gamification UI
+Color Palette: ...
+Animation Level: ...
+Reference: ...
 
-Requirements
+RULES:
 
-Do NOT create html tag.
+- Do NOT create WordPress pages
+- Do NOT create shortcode
+- Do NOT add <html>, <head>, <body>
+- Only write inside template files
+- Use semantic HTML
+- Use "gml-" prefix for all classes
+- Keep UI consistent across all pages
+- Reuse existing components whenever possible
+- No duplicate CSS or JS logic
+- No external libraries unless requested
 
-Do NOT create head tag.
+OUTPUT FORMAT:
 
-Do NOT create body tag.
+- templates/...php
+- assets/css/style.css (only changes)
+- assets/js/script.js (only changes)
 
-Create ONLY the content inside templates/...php.
+IMPORTANT:
+If a file already exists, modify only necessary parts, do not rewrite entire file.
 
-Use semantic HTML.
-
-Use modern CSS.
-
-Responsive.
-
-Professional spacing.
-
-Professional typography.
-
-Smooth animation.
-
-Modern UI.
-
-Use unique class names starting with:
-
-gml-
-
-Example:
-
-gml-login-container
-
-gml-card
-
-gml-btn
-
-Do NOT use generic names like:
-
-container
-
-wrapper
-
-content
-
-button
-
-Output
-
-1. HTML for templates/...php
-
-2. CSS for assets/css/style.css
-
-3. JavaScript for assets/js/script.js
-
-Separate every code clearly.
-
-Do not explain anything.
-
-Generate production-ready code.
+Do not explain anything. Only output code.
