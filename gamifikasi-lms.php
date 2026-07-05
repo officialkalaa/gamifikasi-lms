@@ -26,6 +26,26 @@ function gamifikasi_lms_assets() {
         plugin_dir_url(__FILE__) . 'assets/css/style.css'
     );
 
+    wp_enqueue_style(
+    'gamifikasi-components',
+    plugin_dir_url(__FILE__) . 'assets/css/components.css'
+    );
+
+    wp_enqueue_style(
+        'gamifikasi-login',
+        plugin_dir_url(__FILE__) . 'assets/css/login.css'
+    );
+
+    wp_enqueue_style(
+        'gamifikasi-landing',
+        plugin_dir_url(__FILE__) . 'assets/css/landing.css'
+    );
+
+    wp_enqueue_style(
+        'gamifikasi-register',
+        plugin_dir_url(__FILE__) . 'assets/css/register.css'
+    );
+
     wp_enqueue_script(
         'gamifikasi-script',
         plugin_dir_url(__FILE__) . 'assets/js/script.js',
@@ -33,37 +53,37 @@ function gamifikasi_lms_assets() {
         false,
         true
     );
-wp_enqueue_script(
-    'firebase-app',
-    'https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js',
-    array(),
-    null,
-    true
-);
+    wp_enqueue_script(
+        'firebase-app',
+        'https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js',
+        array(),
+        null,
+        true
+    );
 
-wp_enqueue_script(
-    'firebase-auth',
-    'https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js',
-    array('firebase-app'),
-    null,
-    true
-);
+    wp_enqueue_script(
+        'firebase-auth',
+        'https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js',
+        array('firebase-app'),
+        null,
+        true
+    );
 
-wp_enqueue_script(
-    'firebase-firestore',
-    'https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js',
-    array('firebase-app'),
-    null,
-    true
-);
+    wp_enqueue_script(
+        'firebase-firestore',
+        'https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js',
+        array('firebase-app'),
+        null,
+        true
+    );
 
-wp_enqueue_script(
-    'firebase-config',
-    plugin_dir_url(__FILE__) . 'firebase/firebase-config.js',
-    array('firebase-firestore'),
-    null,
-    true
-);
+    wp_enqueue_script(
+        'firebase-config',
+        plugin_dir_url(__FILE__) . 'firebase/firebase-config.js',
+        array('firebase-firestore'),
+        null,
+        true
+    );
 }
 
 add_action('wp_enqueue_scripts', 'gamifikasi_lms_assets');

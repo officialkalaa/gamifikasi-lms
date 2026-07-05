@@ -134,7 +134,7 @@
 
                     <p class="gml-login-prompt">
                         Already have an account?
-                     <a href="<?php echo home_url('/login'); ?>" class="...">Get Started</a>
+                     <a href="<?php echo home_url('/login'); ?>" class="...">Login</a>
                     </p>
                 </form>
             </div>
