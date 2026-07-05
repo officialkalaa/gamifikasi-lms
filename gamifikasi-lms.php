@@ -46,6 +46,11 @@ function gamifikasi_lms_assets() {
         plugin_dir_url(__FILE__) . 'assets/css/register.css'
     );
 
+    wp_enqueue_style(
+        'gamifikasi-forgot',
+        plugin_dir_url(__FILE__) . 'assets/css/forgot.css'
+    );
+
     wp_enqueue_script(
         'gamifikasi-script',
         plugin_dir_url(__FILE__) . 'assets/js/script.js',
@@ -87,4 +92,3 @@ function gamifikasi_lms_assets() {
 }
 
 add_action('wp_enqueue_scripts', 'gamifikasi_lms_assets');
-
