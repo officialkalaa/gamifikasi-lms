@@ -24,6 +24,12 @@ function gamifikasi_add_routes() {
         'top'
     );
 
+    add_rewrite_rule(
+        '^forgot/?$',
+        'index.php?gamifikasi_page=forgot',
+        'top'
+    );
+
 }
 
 add_action('init', 'gamifikasi_add_routes');
