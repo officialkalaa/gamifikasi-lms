@@ -101,8 +101,8 @@
                     <div class="gml-auth-divider"><span>or</span></div>
 
                     <div class="gml-auth-links">
-                        <a href="<?php echo esc_url(wp_login_url()); ?>">Back to Login</a>
-                        <a href="<?php echo esc_url(wp_registration_url()); ?>">Create an Account</a>
+                        <a href="/login" class="...">Back to Login</a>
+                        <a href="/register" class="...">Create an Account</a>
                     </div>
                 </div>
 
