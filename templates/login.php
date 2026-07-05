@@ -103,7 +103,7 @@
               <span class="gml-checkbox-box"></span>
               <span>Remember me</span>
             </label>
-            <a class="gml-forgot-link" href="#">Forgot password?</a>
+            <a class="gml-forgot-link" href="/forgot">Forgot password?</a>
           </div>
 
           <button class="gml-login-btn" type="submit">
