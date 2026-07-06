@@ -82,3 +82,195 @@ OUTPUT FORMAT:
 
 FINAL RULE:
 If instruction conflicts with project_rules.md, ALWAYS follow project_rules.md first.
+
+firestore database yang harus dibuat
+
+## FIRESTORE DATABASE STRUCTURE
+
+### 1. users
+
+Collection ID:
+users
+
+Fields:
+
+- uid (string)
+- fullname (string)
+- email (string)
+- role (string: teacher | student)
+- photoURL (string)
+- xp (number)
+- level (number)
+- streak (number)
+- createdAt (timestamp)
+- updatedAt (timestamp)
+- status (string)
+
+---
+
+### 2. courses
+
+Collection ID:
+courses
+
+Fields:
+
+- courseId (string)
+- teacherId (string)
+- title (string)
+- description (string)
+- thumbnail (string)
+- difficulty (string)
+- createdAt (timestamp)
+- updatedAt (timestamp)
+- status (string)
+
+---
+
+### 3. materials
+
+Collection ID:
+materials
+
+Fields:
+
+- materialId (string)
+- courseId (string)
+- teacherId (string)
+- title (string)
+- content (string)
+- order (number)
+- createdAt (timestamp)
+- updatedAt (timestamp)
+
+---
+
+### 4. quizzes
+
+Collection ID:
+quizzes
+
+Fields:
+
+- quizId (string)
+- courseId (string)
+- title (string)
+- duration (number)
+- totalQuestion (number)
+- passingScore (number)
+- createdAt (timestamp)
+
+---
+
+### 5. questions
+
+Collection ID:
+questions
+
+Fields:
+
+- questionId (string)
+- quizId (string)
+- question (string)
+- optionA (string)
+- optionB (string)
+- optionC (string)
+- optionD (string)
+- correctAnswer (string)
+- explanation (string)
+
+---
+
+### 6. progress
+
+Collection ID:
+progress
+
+Fields:
+
+- uid (string)
+- courseId (string)
+- completedMaterial (number)
+- totalMaterial (number)
+- progress (number)
+- lastMaterial (string)
+- updatedAt (timestamp)
+
+---
+
+### 7. quiz_results
+
+Collection ID:
+quiz_results
+
+Fields:
+
+- resultId (string)
+- uid (string)
+- quizId (string)
+- score (number)
+- correct (number)
+- wrong (number)
+- finishedAt (timestamp)
+
+---
+
+### 8. comments
+
+Collection ID:
+comments
+
+Fields:
+
+- commentId (string)
+- materialId (string)
+- uid (string)
+- fullname (string)
+- photoURL (string)
+- comment (string)
+- likeCount (number)
+- createdAt (timestamp)
+
+---
+
+### 9. comment_replies
+
+Collection ID:
+comment_replies
+
+Fields:
+
+- replyId (string)
+- commentId (string)
+- uid (string)
+- fullname (string)
+- reply (string)
+- createdAt (timestamp)
+
+---
+
+### 10. notifications
+
+Collection ID:
+notifications
+
+Fields:
+
+- notificationId (string)
+- uid (string)
+- title (string)
+- message (string)
+- isRead (boolean)
+- createdAt (timestamp)
+
+---
+
+Leaderboard does NOT have its own collection.
+
+Always query:
+
+users
+
+Order by:
+
+xp (descending)
