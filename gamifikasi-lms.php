@@ -52,12 +52,53 @@ function gamifikasi_lms_assets() {
     );
 
     wp_enqueue_script(
-        'gamifikasi-script',
-        plugin_dir_url(__FILE__) . 'assets/js/script.js',
+        'gamifikasi-app',
+        plugin_dir_url(__FILE__) . 'assets/js/app.js',
         array(),
         false,
         true
     );
+
+    wp_enqueue_script(
+        'gamifikasi-landing',
+        plugin_dir_url(__FILE__) . 'assets/js/landing.js',
+        array('gamifikasi-app'),
+        false,
+        true
+    );
+
+    wp_enqueue_script(
+        'gamifikasi-login',
+        plugin_dir_url(__FILE__) . 'assets/js/login.js',
+        array('gamifikasi-app'),
+        false,
+        true
+    );
+
+    wp_enqueue_script(
+        'gamifikasi-register',
+        plugin_dir_url(__FILE__) . 'assets/js/register.js',
+        array('gamifikasi-app'),
+        false,
+        true
+    );
+
+    wp_enqueue_script(
+        'gamifikasi-forgot',
+        plugin_dir_url(__FILE__) . 'assets/js/forgot.js',
+        array('gamifikasi-app'),
+        false,
+        true
+    );
+
+    wp_enqueue_script(
+        'gamifikasi-dashboard',
+        plugin_dir_url(__FILE__) . 'assets/js/dashboard.js',
+        array('gamifikasi-app'),
+        false,
+        true
+    );
+
     wp_enqueue_script(
         'firebase-app',
         'https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js',
