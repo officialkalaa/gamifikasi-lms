@@ -293,9 +293,13 @@
   font-size: 24px;
 }
 
-.gml-hero-visual {
-  position: relative;
-  min-height: 560px;
+.gml-hero-visual{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:auto;
+    overflow:visible;
 }
 
 .gml-dashboard-preview {
@@ -854,9 +858,9 @@
   translate: 0 0;
 }
 
-.gml-hero-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
+.gml-hero-layout{
+    display:grid;
+    grid-template-columns:55% 45%;
+    align-items:center;
+    gap:24px;
 }

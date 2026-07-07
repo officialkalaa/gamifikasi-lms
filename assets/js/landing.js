@@ -154,7 +154,7 @@
       renderer: "svg",
       loop: true,
       autoplay: true,
-      path: "/wp-content/plugins/gamifikasi-lms/assets/lottie/education.json",
+      path: "/wp-content/plugins/gamifikasi-lms/assets/lottie/learning.json",
     });
   });
 })();
