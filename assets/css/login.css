@@ -95,16 +95,19 @@
   animation-delay: -7s;
 }
 
-.gml-login-layout {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
-  align-items: center;
-  min-height: 100vh;
-  width: min(1180px, calc(100% - 48px));
-  margin: 0 auto;
-  gap: 48px;
-  padding: 56px 0;
+.gml-login-layout{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:100%;
+    max-width:1200px;
+
+    min-height:100vh;
+
+    margin:0 auto;
+    padding:40px 20px;
 }
 
 .gml-hero-panel,
@@ -331,13 +334,16 @@
   animation-delay: -3.2s;
 }
 
-.gml-form-panel {
-  display: flex;
-  justify-content: center;
+.gml-form-panel{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .gml-login-card {
-  width: min(100%, 470px);
+   width:100%;
+    max-width:500px;
   padding: 34px;
   border: 1px solid rgba(255, 255, 255, 0.72);
   border-radius: var(--gml-radius-lg);

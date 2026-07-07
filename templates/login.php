@@ -12,50 +12,7 @@
   </div>
 
   <div class="gml-login-layout">
-    <section class="gml-hero-panel" aria-label="Gamifikasi LMS welcome">
-      <div class="gml-hero-copy">
-        <span class="gml-kicker">Gamifikasi LMS</span>
-        <h1 class="gml-hero-title">Continue your learning adventure.</h1>
-        <p class="gml-hero-text">
-          Earn XP, unlock achievements, climb the leaderboard, and keep every lesson feeling rewarding.
-        </p>
-      </div>
-
-      <div class="gml-illustration" data-gml-parallax>
-        <div class="gml-orbit gml-orbit-one"></div>
-        <div class="gml-orbit gml-orbit-two"></div>
-
-        <article class="gml-achievement-card">
-          <div class="gml-achievement-icon">★</div>
-          <div>
-            <strong>Achievement Unlocked</strong>
-            <span>7-day learning streak</span>
-          </div>
-        </article>
-
-        <article class="gml-xp-card">
-          <span>+850 XP</span>
-          <strong>Level 12</strong>
-        </article>
-
-        <article class="gml-leaderboard-widget">
-          <div class="gml-leaderboard-header">
-            <strong>Leaderboard</strong>
-            <span>Today</span>
-          </div>
-          <ol class="gml-leaderboard-list">
-            <li><span>1</span><strong>Nadia</strong><em>9,420 XP</em></li>
-            <li><span>2</span><strong>Raka</strong><em>8,880 XP</em></li>
-            <li><span>3</span><strong>You</strong><em>8,610 XP</em></li>
-          </ol>
-        </article>
-
-        <span class="gml-floating-badge gml-floating-badge-one">🏆</span>
-        <span class="gml-floating-badge gml-floating-badge-two">⚡</span>
-        <span class="gml-floating-badge gml-floating-badge-three">🪙</span>
-        <span class="gml-floating-badge gml-floating-badge-four">✓</span>
-      </div>
-    </section>
+    
 
     <section class="gml-form-panel" aria-label="Login form">
       <article class="gml-login-card">
