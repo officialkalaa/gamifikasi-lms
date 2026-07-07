@@ -854,7 +854,9 @@
   translate: 0 0;
 }
 
-.gml-hero-animation {
-  width: 450px;
-  height: 450px;
+.gml-hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
 }
