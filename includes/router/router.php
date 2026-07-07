@@ -7,6 +7,12 @@ if (!defined('ABSPATH')) {
 function gamifikasi_add_routes() {
 
     add_rewrite_rule(
+        '^dashboard/?$',
+        'index.php?gamifikasi_page=dashboard',
+        'top'
+    );
+
+    add_rewrite_rule(
         '^login/?$',
         'index.php?gamifikasi_page=login',
         'top'

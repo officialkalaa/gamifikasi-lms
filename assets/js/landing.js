@@ -144,4 +144,17 @@
       { passive: true },
     );
   }
+  document.addEventListener("DOMContentLoaded", function () {
+    const animation = document.querySelector(".gml-hero-animation");
+
+    if (!animation) return;
+
+    lottie.loadAnimation({
+      container: animation,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "/wp-content/plugins/gamifikasi-lms/assets/lottie/education.json",
+    });
+  });
 })();
