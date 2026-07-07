@@ -853,3 +853,8 @@
   opacity: 1;
   translate: 0 0;
 }
+
+.gml-hero-animation {
+  width: 450px;
+  height: 450px;
+}

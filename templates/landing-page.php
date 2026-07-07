@@ -21,6 +21,7 @@
   <section id="gml-home" class="gml-hero">
     <div class="gml-hero-glow gml-hero-glow-one"></div>
     <div class="gml-hero-glow gml-hero-glow-two"></div>
+    <div class="gml-hero-animation"></div>
 
     <div class="gml-shell gml-hero-layout">
       <div class="gml-hero-copy gml-reveal">
