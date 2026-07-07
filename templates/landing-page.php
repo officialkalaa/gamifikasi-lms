@@ -21,69 +21,33 @@
   <section id="gml-home" class="gml-hero">
     <div class="gml-hero-glow gml-hero-glow-one"></div>
     <div class="gml-hero-glow gml-hero-glow-two"></div>
-    <div class="gml-hero-animation"></div>
 
-    <div class="gml-shell gml-hero-layout">
-      <div class="gml-hero-copy gml-reveal">
-        <span class="gml-kicker">Premium WordPress LMS Gamification Plugin</span>
-        <h1>Turn learning into a joyful achievement journey.</h1>
-        <p>Boost student engagement with XP, badges, levels, missions, rewards, achievements, progress tracking, and leaderboards built for modern WordPress LMS platforms.</p>
+    <div class="gml-shell">
+        <div class="gml-hero-layout">
 
-        <div class="gml-hero-actions">
-          <a class="gml-btn gml-btn-primary" href="/login">Start Gamifying</a>
-          <a class="gml-btn gml-btn-soft" href="#gml-showcase">View Dashboard</a>
-        </div>
+            <div class="gml-hero-copy gml-reveal">
+                <span class="gml-kicker">Premium WordPress LMS Gamification Plugin</span>
 
-        <div class="gml-hero-proof">
-          <span><strong class="gml-counter" data-gml-target="92">0</strong>% engagement lift</span>
-          <span><strong class="gml-counter" data-gml-target="48">0</strong> badge types</span>
-          <span><strong class="gml-counter" data-gml-target="12">0</strong> level paths</span>
-        </div>
-      </div>
+                <h1>Turn learning into a joyful achievement journey.</h1>
 
-      <div class="gml-hero-visual gml-parallax">
-        <div class="gml-floating-card gml-xp-card">
-          <span>+350 XP</span>
-          <strong>Mission Complete</strong>
-        </div>
+                <p>
+                    Boost student engagement with XP, badges, levels, missions,
+                    rewards, achievements, progress tracking, and leaderboards
+                    built for modern WordPress LMS platforms.
+                </p>
 
-        <div class="gml-floating-card gml-badge-card">
-          <span>🏆</span>
-          <strong>Quiz Master</strong>
-        </div>
-
-        <div class="gml-dashboard-preview">
-          <div class="gml-dashboard-header">
-            <div>
-              <span>Student Progress</span>
-              <h2>Level 8 Explorer</h2>
+                <div class="gml-hero-actions">
+                    <!-- tombol di sini -->
+                </div>
             </div>
-            <strong>8,740 XP</strong>
-          </div>
 
-          <div class="gml-progress-block">
-            <div class="gml-progress-label">
-              <span>Next level</span>
-              <strong>76%</strong>
+            <div class="gml-hero-visual">
+                <div class="gml-hero-animation"></div>
             </div>
-            <div class="gml-progress-track">
-              <span style="--gml-progress:76%"></span>
-            </div>
-          </div>
 
-          <div class="gml-badge-strip" aria-label="Achievement badges">
-            <span>⚡</span><span>🎯</span><span>💎</span><span>🚀</span>
-          </div>
-
-          <div class="gml-leaderboard-mini">
-            <div><span>1</span><strong>Alya</strong><em>12,450 XP</em></div>
-            <div><span>2</span><strong>Rafi</strong><em>10,900 XP</em></div>
-            <div><span>3</span><strong>Nadia</strong><em>9,870 XP</em></div>
-          </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
 
   <section class="gml-logos">
     <div class="gml-shell gml-logo-grid">
