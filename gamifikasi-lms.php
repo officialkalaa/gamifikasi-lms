@@ -56,6 +56,11 @@ function gamifikasi_lms_assets() {
         plugin_dir_url(__FILE__) . 'assets/css/dashboard.css'
     );
 
+    wp_enqueue_style(
+        'gamifikasi-dashboardsiswa',
+        plugin_dir_url(__FILE__) . 'assets/css/dashboardsiswa.css'
+    );
+
     wp_enqueue_script(
         'gamifikasi-app',
         plugin_dir_url(__FILE__) . 'assets/js/app.js',
@@ -99,6 +104,14 @@ function gamifikasi_lms_assets() {
     wp_enqueue_script(
         'gamifikasi-dashboard',
         plugin_dir_url(__FILE__) . 'assets/js/dashboard.js',
+        array('gamifikasi-app'),
+        false,
+        true
+    );
+
+    wp_enqueue_script(
+        'gamifikasi-dashboardsiswa',
+        plugin_dir_url(__FILE__) . 'assets/js/dashboardsiswa.js',
         array('gamifikasi-app'),
         false,
         true
