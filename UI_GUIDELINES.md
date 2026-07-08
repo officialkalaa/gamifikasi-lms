@@ -1,238 +1,192 @@
-# Gamifikasi LMS
+# UI GUIDELINES
 
-UI Design System
+## Tujuan Desain
 
-Version
+Gamifikasi LMS adalah platform pembelajaran yang modern.
 
-1.0
+Tampilan harus terasa profesional, ringan, sederhana, dan menyenangkan digunakan.
 
----
-
-Design Goal
-
-Create a modern, clean, educational, and gamified user experience.
-
-The interface should feel like a combination of:
-
-Duolingo
-
-Discord
-
-Notion
-
-Google Classroom
-
-The design should be simple, premium, and easy to use.
+Gamifikasi hanya digunakan sebagai pendukung proses belajar, bukan menjadi fokus utama.
 
 ---
 
-Color Palette
+## Karakter Desain
 
-Primary
-
-...
-
-Secondary
-
-...
-
-Accent
-
-...
-
-Background
-
-...
-
-Surface
-
-...
-
-Text Primary
-
-...
-
-Text Secondary
-
-...
-
-Success
-
-...
-
-Warning
-
-...
-
-Danger
-
-...
-
-Example
-
-Primary
-
-#4F46E5
-
-Secondary
-
-#7C3AED
-
-Accent
-
-#F59E0B
-
-Background
-
-#F8FAFC
-
-Surface
-
-#FFFFFF
-
-Text Primary
-
-#1E293B
-
-Text Secondary
-
-#64748B
-
----
-
-Typography
-
-Font Family
-
-Poppins
-
-Fallback
-
-sans-serif
-
-Heading
-
-Bold
-
-Body
-
-Regular
-
-Button
-
-Semi Bold
-
----
-
-Border Radius
-
-Card
-
-20px
-
-Button
-
-16px
-
-Input
-
-14px
-
-Modal
-
-24px
-
----
-
-Shadow
-
-Use soft shadow only.
-
-Example
-
-0 10px 30px rgba(0,0,0,.08)
-
-Avoid hard shadows.
-
----
-
-Spacing
-
-Small
-
-8px
-
-Medium
-
-16px
-
-Large
-
-24px
-
-Section
-
-64px
-
----
-
-Buttons
-
-Rounded
+Desain harus memiliki karakter:
 
 Modern
 
-Hover Animation
+Minimalis
 
-Scale 1.03
+Profesional
 
-Transition
+Elegan
 
-0.3s ease
+Bersih
 
----
+Premium
 
-Cards
+Mudah dipahami
 
-Rounded
-
-Soft Shadow
-
-White Background
-
-Padding 24px
+Tidak berlebihan
 
 ---
 
-Icons
+## Referensi Desain
 
-Use Heroicons
+Gunakan pendekatan desain dari:
 
-or
+Apple (whitespace, tipografi, kesederhanaan.)
 
-Lucide Icons
+Linear (dashboard, komponen, konsistensi.)
 
-Do not use emoji as icons.
+Stripe (layout, CTA, visual hierarchy.)
 
----
+Notion (keterbacaan konten.)
 
-Animation
+Google Classroom (alur pembelajaran.)
 
-Smooth Fade
+Duolingo (konsep gamifikasi dan motivasi belajar (bukan gaya visual))
 
-Slide Up
+Jangan meniru layout secara langsung.
 
-Hover Scale
-
-Duration
-
-300ms
-
-Avoid excessive animations.
+Gunakan hanya filosofi desainnya.
 
 ---
 
-Responsive
+## Warna
+
+Gunakan satu warna utama.
+
+Gunakan satu warna aksen.
+
+Gunakan warna netral untuk background.
+
+Gunakan kontras yang nyaman dibaca.
+
+Hindari terlalu banyak warna.
+
+---
+
+## Typography
+
+Gunakan font:
+
+Inter
+
+atau
+
+Poppins
+
+Heading harus jelas.
+
+Body text harus nyaman dibaca.
+
+Gunakan line-height yang cukup.
+
+Jangan menggunakan terlalu banyak ukuran font.
+
+---
+
+## Spacing
+
+Gunakan whitespace yang cukup.
+
+Jangan membuat halaman terasa penuh.
+
+Setiap section harus memiliki jarak yang konsisten.
+
+Setiap komponen harus memiliki padding yang nyaman.
+
+---
+
+## Card
+
+Gunakan card hanya jika memang diperlukan.
+
+Card harus sederhana.
+
+Gunakan shadow yang halus.
+
+Gunakan border radius yang konsisten.
+
+Jangan membuat card terlalu besar.
+
+---
+
+## Tombol
+
+Tombol utama harus langsung terlihat.
+
+Gunakan ukuran yang nyaman diklik.
+
+Hover harus halus.
+
+Jangan menggunakan terlalu banyak variasi tombol.
+
+---
+
+## Input
+
+Input harus sederhana.
+
+Mudah dibaca.
+
+Mudah digunakan.
+
+Konsisten pada seluruh halaman.
+
+---
+
+## Icon
+
+Gunakan Heroicons atau Lucide.
+
+Gunakan icon hanya jika membantu pengguna.
+
+Jangan menggunakan icon sebagai dekorasi.
+
+---
+
+## Shadow
+
+Gunakan shadow yang tipis.
+
+Shadow hanya sebagai pemisah visual.
+
+Hindari shadow yang terlalu gelap.
+
+---
+
+## Border Radius
+
+Gunakan radius yang konsisten.
+
+Jangan mencampur terlalu banyak ukuran radius.
+
+---
+
+## Animasi
+
+Animasi harus:
+
+Halus
+
+Cepat
+
+Ringan
+
+Memiliki tujuan
+
+Durasi sekitar 200–300ms.
+
+Hindari animasi yang mengganggu.
+
+---
+
+## Responsive
+
+Pastikan tampilan tetap baik pada:
 
 Desktop
 
@@ -242,26 +196,40 @@ Tablet
 
 Mobile
 
-Everything must be responsive.
+Pengalaman pengguna harus tetap konsisten di semua ukuran layar.
 
 ---
 
-Accessibility
+## Accessibility
 
-Minimum contrast ratio.
+Gunakan ukuran teks yang mudah dibaca.
 
-Clickable area minimum 44px.
+Pastikan kontras warna cukup.
 
-Readable font size.
+Area klik minimal 44px.
+
+Pastikan navigasi mudah digunakan.
 
 ---
 
-Frontend AI Prompt
+## Checklist Sebelum Membuat UI
 
-Whenever generating UI, always follow this Design System.
+Sebelum menghasilkan kode, pastikan:
 
-Never change the visual identity unless requested.
+✓ Layout terlihat rapi.
 
-Maintain consistency across every page.
+✓ Spacing konsisten.
 
-Every page should look like it belongs to the same application.
+✓ Typography konsisten.
+
+✓ Warna konsisten.
+
+✓ Mudah dipahami.
+
+✓ Tidak terlihat seperti template AI.
+
+✓ Tidak terlalu ramai.
+
+✓ Terlihat seperti produk profesional.
+
+✓ Seluruh halaman terasa berada dalam satu ekosistem aplikasi.
