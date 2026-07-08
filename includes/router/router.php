@@ -19,7 +19,7 @@ function gamifikasi_add_routes() {
     );
 
     add_rewrite_rule(
-        '^dashbordsiswa/?$',
+        '^dashboardsiswa/?$',
         'index.php?gamifikasi_page=dashboardsiswa',
         'top'
     );
