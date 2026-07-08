@@ -19,6 +19,12 @@ function gamifikasi_add_routes() {
     );
 
     add_rewrite_rule(
+        '^dashbordsiswa/?$',
+        'index.php?gamifikasi_page=dashboardsiswa',
+        'top'
+    );
+
+    add_rewrite_rule(
         '^landing/?$',
         'index.php?gamifikasi_page=landing-page',
         'top'
