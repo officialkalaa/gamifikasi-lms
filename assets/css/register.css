@@ -19,15 +19,10 @@
 }
 
 .gml-register-layout {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(380px, 0.78fr);
-  gap: clamp(28px, 5vw, 72px);
+  display: flex;
+  justify-content: center;
   align-items: center;
-  max-width: 1240px;
   min-height: calc(100vh - clamp(48px, 8vw, 112px));
-  margin: 0 auto;
 }
 
 .gml-bg-blob {
