@@ -4,57 +4,6 @@
     <div class="gml-bg-blob gml-bg-blob-three" aria-hidden="true"></div>
 
     <div class="gml-register-layout">
-        <aside class="gml-register-hero gml-reveal" aria-label="Gamifikasi LMS benefits">
-            <div class="gml-hero-copy">
-                <span class="gml-kicker">Start your learning quest</span>
-                <h1>Join Gamifikasi LMS and level up every lesson.</h1>
-                <p>Create your account to earn XP, unlock badges, complete missions, collect rewards, and climb the leaderboard with your learning community.</p>
-            </div>
-
-            <div class="gml-game-illustration" aria-hidden="true">
-                <div class="gml-orbit-ring"></div>
-
-                <div class="gml-avatar-token">
-                    <span class="gml-avatar-face">XP</span>
-                </div>
-
-                <div class="gml-floating-card gml-xp-card">
-                    <span class="gml-card-label">Today XP</span>
-                    <strong>+1,240</strong>
-                    <small>Learning streak active</small>
-                </div>
-
-                <div class="gml-floating-card gml-badge-card">
-                    <span class="gml-badge-icon">★</span>
-                    <div>
-                        <span class="gml-card-label">Badge Unlocked</span>
-                        <strong>Mission Master</strong>
-                    </div>
-                </div>
-
-                <div class="gml-floating-card gml-mission-card">
-                    <span class="gml-card-label">Mission Progress</span>
-                    <strong>Complete 3 lessons</strong>
-                    <div class="gml-progress-track">
-                        <span class="gml-progress-fill"></span>
-                    </div>
-                </div>
-
-                <div class="gml-floating-card gml-leaderboard-card">
-                    <span class="gml-card-label">Leaderboard</span>
-                    <ol>
-                        <li><span>01</span> You <strong>8,920</strong></li>
-                        <li><span>02</span> Aruna <strong>8,640</strong></li>
-                        <li><span>03</span> Bima <strong>8,110</strong></li>
-                    </ol>
-                </div>
-
-                <span class="gml-coin gml-coin-one">$</span>
-                <span class="gml-coin gml-coin-two">$</span>
-                <span class="gml-star gml-star-one">★</span>
-                <span class="gml-star gml-star-two">★</span>
-            </div>
-        </aside>
 
         <main class="gml-register-panel">
             <div class="gml-register-card gml-reveal">
