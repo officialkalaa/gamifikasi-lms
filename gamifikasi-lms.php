@@ -13,6 +13,8 @@ if (!defined('ABSPATH')) {
 }
 
 require_once plugin_dir_path(__FILE__) . 'includes/loader.php';
+define('GML_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('GML_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
 function gamifikasi_lms_assets() {
 
