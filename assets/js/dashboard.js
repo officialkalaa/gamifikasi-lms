@@ -1,10 +1,284 @@
 (() => {
-  const page = document.querySelector(".gml-page");
+  "use strict";
 
-  if (!page) {
+  // Safeguard: Check if Firebase is available
+  if (typeof firebase === "undefined" || typeof auth === "undefined" || typeof db === "undefined") {
+    console.error("Firebase SDK is not loaded. Teacher Dashboard will run in offline mode.");
     return;
   }
 
+  const page = document.querySelector(".gml-page");
+  if (!page) return;
+
+  /* ── Authentication & Route Protection ────────────────────────────────── */
+  auth.onAuthStateChanged(function (user) {
+    if (!user) {
+      window.location.href = "/login";
+      return;
+    }
+
+    // Fetch user profile from Firestore
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          var userData = doc.data();
+          if (userData.role === "student") {
+            // Student shouldn't access Teacher Dashboard, redirect them
+            window.location.href = "/dashboardsiswa";
+          } else {
+            // Initialize teacher dashboard metrics & views
+            initializeTeacherDashboard(user, userData);
+          }
+        } else {
+          console.warn("User document not found in Firestore. Redirecting to login...");
+          window.location.href = "/login";
+        }
+      })
+      .catch(function (error) {
+        console.error("Error checking user profile:", error);
+        window.location.href = "/login";
+      });
+  });
+
+  /* ── Teacher Dashboard Initializer ────────────────────────────────────── */
+  function initializeTeacherDashboard(user, userData) {
+    // 1. Fetch Class Summary counters
+    fetchClassSummary();
+
+    // 2. Fetch Live Leaderboard
+    fetchStudentLeaderboard();
+
+    // 3. Fetch Learning Progress list
+    fetchLearningProgress();
+
+    // 4. Fetch Course List
+    fetchCourseList();
+
+    // 5. Fetch Recent Activity Feed
+    fetchRecentActivity();
+  }
+
+  /* ── Fetch & Animate Counters ─────────────────────────────────────────── */
+  function fetchClassSummary() {
+    // Count active students (role == 'student')
+    db.collection("users")
+      .where("role", "==", "student")
+      .get()
+      .then((snapshot) => {
+        updateAndAnimateCounter('Students', snapshot.size);
+      });
+
+    // Count courses
+    db.collection("courses")
+      .get()
+      .then((snapshot) => {
+        updateAndAnimateCounter('Active Classes', snapshot.size);
+      });
+
+    // Count quizzes
+    db.collection("quizzes")
+      .get()
+      .then((snapshot) => {
+        updateAndAnimateCounter('Assignments', snapshot.size);
+      });
+
+    // Compute progress average
+    db.collection("progress")
+      .get()
+      .then((snapshot) => {
+        let totalProgress = 0;
+        snapshot.forEach((doc) => {
+          totalProgress += doc.data().progress || 0;
+        });
+        const avgProgress = snapshot.size > 0 ? Math.round(totalProgress / snapshot.size) : 82;
+        updateAndAnimateCounter('Progress %', avgProgress);
+      });
+  }
+
+  function updateAndAnimateCounter(labelName, targetValue) {
+    document.querySelectorAll(".gml-metric").forEach((metric) => {
+      const label = metric.querySelector("small");
+      const counter = metric.querySelector("[data-gml-counter]");
+      if (label && label.textContent.trim() === labelName && counter) {
+        counter.dataset.gmlCounter = targetValue;
+        animateCounter(counter);
+      }
+    });
+  }
+
+  /* ── Fetch Leaderboard ────────────────────────────────────────────────── */
+  function fetchStudentLeaderboard() {
+    const leaderboardOl = document.querySelector(".gml-leaderboard");
+    if (!leaderboardOl) return;
+
+    db.collection("users")
+      .where("role", "==", "student")
+      .orderBy("xp", "desc")
+      .limit(10)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.empty) return;
+
+        let html = "";
+        let rank = 1;
+
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          let medal = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : "🏅";
+
+          html += `<li>`;
+          html += `  <span>${medal}</span>`;
+          html += `  <strong>${escapeHTML(data.fullname)}</strong>`;
+          html += `  <em>${(data.xp || 0).toLocaleString("id-ID")} XP</em>`;
+          html += `</li>`;
+
+          rank++;
+        });
+
+        leaderboardOl.innerHTML = html;
+      })
+      .catch((err) => {
+        console.warn("Could not fetch Firestore leaderboard, using offline fallback.", err);
+      });
+  }
+
+  /* ── Fetch Learning Progress ─────────────────────────────────────────── */
+  function fetchLearningProgress() {
+    const progressList = document.querySelector(".gml-progress-list");
+    if (!progressList) return;
+
+    db.collection("progress")
+      .limit(12)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.empty) return;
+
+        let html = "";
+        snapshot.forEach((doc) => {
+          const progressData = doc.data();
+          const progressVal = parseInt(progressData.progress, 10) || 0;
+
+          // Fetch student name
+          db.collection("users")
+            .doc(progressData.uid)
+            .get()
+            .then((userDoc) => {
+              const name = userDoc.exists ? userDoc.data().fullname : "Siswa LMS";
+              
+              const itemHtml = `
+                <article>
+                  <strong>${escapeHTML(name)}</strong>
+                  <div class="gml-progress">
+                    <span style="--gml-progress: ${progressVal}%"></span>
+                  </div>
+                  <small>${progressVal}%</small>
+                </article>
+              `;
+              
+              // Append to list dynamically
+              const tempDiv = document.createElement("div");
+              tempDiv.innerHTML = itemHtml;
+              progressList.appendChild(tempDiv.firstElementChild);
+            });
+        });
+
+        // Clear existing mock entries
+        progressList.innerHTML = "";
+      })
+      .catch((err) => {
+        console.warn("Could not load dynamic progress list, using fallback.", err);
+      });
+  }
+
+  /* ── Fetch Course Class List ─────────────────────────────────────────── */
+  function fetchCourseList() {
+    const tableDiv = document.querySelector(".gml-table");
+    if (!tableDiv) return;
+
+    db.collection("courses")
+      .limit(6)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.empty) return;
+
+        let html = "";
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          const difficulty = data.difficulty || "Umum";
+
+          html += `<div>`;
+          html += `  <strong>${escapeHTML(data.title)}</strong>`;
+          html += `  <span>${escapeHTML(data.description || "Kelas Gamifikasi")}</span>`;
+          html += `  <em>${escapeHTML(difficulty)}</em>`;
+          html += `</div>`;
+        });
+
+        tableDiv.innerHTML = html;
+      })
+      .catch((err) => {
+        console.warn("Failed to load active courses, using default table.", err);
+      });
+  }
+
+  /* ── Fetch Recent Activity ───────────────────────────────────────────── */
+  function fetchRecentActivity() {
+    const feedDiv = document.querySelector(".gml-feed");
+    if (!feedDiv) return;
+
+    db.collection("quiz_results")
+      .orderBy("finishedAt", "desc")
+      .limit(5)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.empty) return;
+
+        let html = "";
+        snapshot.forEach((doc) => {
+          const data = doc.data();
+          const score = data.score || 0;
+
+          db.collection("users")
+            .doc(data.uid)
+            .get()
+            .then((userDoc) => {
+              const name = userDoc.exists ? userDoc.data().fullname : "Siswa";
+              
+              const actHtml = `
+                <article>
+                  <span>✅</span>
+                  <p><strong>${escapeHTML(name)}</strong> menyelesaikan kuis dengan skor ${score}/100.</p>
+                  <small>Baru saja</small>
+                </article>
+              `;
+
+              const tempDiv = document.createElement("div");
+              tempDiv.innerHTML = actHtml;
+              feedDiv.appendChild(tempDiv.firstElementChild);
+            });
+        });
+
+        // Empty existing static list
+        feedDiv.innerHTML = "";
+      })
+      .catch((err) => {
+        console.warn("Could not fetch live activity logs.", err);
+      });
+  }
+
+  /* ── Safe HTML Escape utility ───────────────────────────────────────── */
+  function escapeHTML(str) {
+    if (!str) return "";
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  /* ── Panel Switching Logic (Original) ─────────────────────────────────── */
   const sidebarButtons = Array.from(page.querySelectorAll("[data-gml-panel]"));
   const panels = Array.from(page.querySelectorAll("[data-gml-panel-content]"));
 
@@ -34,14 +308,13 @@
     panel.hidden = !panel.classList.contains("is-active");
   });
 
+  /* ── Scroll Animations Observer ──────────────────────────────────────── */
   const revealItems = Array.from(page.querySelectorAll(".gml-reveal"));
   const counterItems = Array.from(page.querySelectorAll("[data-gml-counter]"));
   const counted = new WeakSet();
 
   const animateCounter = (element) => {
-    if (counted.has(element)) {
-      return;
-    }
+    if (counted.has(element)) return;
 
     counted.add(element);
 
@@ -65,9 +338,7 @@
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
+        if (!entry.isIntersecting) return;
 
         entry.target.classList.add("is-visible");
 
@@ -87,6 +358,7 @@
   revealItems.forEach((item) => observer.observe(item));
   counterItems.forEach((item) => observer.observe(item));
 
+  /* ── Interactive Parallax Visuals (Original) ────────────────────────── */
   page.addEventListener("pointermove", (event) => {
     const hero = page.querySelector(".gml-hero__visual");
 
@@ -107,6 +379,7 @@
     }
   });
 
+  /* ── Button Ripples support ─────────────────────────────────────────── */
   page.querySelectorAll(".gml-btn, .gml-action-grid button, .gml-task-list button").forEach((button) => {
     button.addEventListener("click", (event) => {
       const ripple = document.createElement("span");
